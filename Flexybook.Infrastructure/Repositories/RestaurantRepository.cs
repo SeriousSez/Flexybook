@@ -1,6 +1,4 @@
 ﻿using Flexybook.Domain.Entities.Restaurant;
-using Flexybook.Domain.Responses.Restaurant;
-using Flexybook___Restaurant_Opening_Hours.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flexybook.Infrastructure.Repositories
