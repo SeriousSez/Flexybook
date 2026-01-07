@@ -7,18 +7,24 @@ namespace Flexybook.ApplicationService.Services
     {
         private readonly IRestaurantRepository _restaurantRepository = restaurantRepository;
 
-        public async Task<RestaurantResponse?> Get(Guid id)
+        public async Task<RestaurantResponse?> GetAsync(Guid id)
         {
-            var restaurant = await _restaurantRepository.GetFull(id);
+            var restaurant = await _restaurantRepository.GetFullAsync(id);
 
             return restaurant?.ToResponse();
         }
 
-        public async Task<IEnumerable<RestaurantResponse>> GetAll()
+        public async Task<IEnumerable<RestaurantResponse>> GetAllAsync()
         {
-            var restaurants = await _restaurantRepository.GetAllFull();
+            var restaurants = await _restaurantRepository.GetAllFullAsync();
 
             return restaurants.Select(r => r.ToResponse());
+        }
+
+        public async Task<bool> UpdateAsync(RestaurantResponse restaurant)
+        {
+            var restaurantEntity = restaurant.ToEntity();
+            return await _restaurantRepository.UpdateAsync(restaurantEntity);
         }
     }
 }

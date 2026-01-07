@@ -49,10 +49,10 @@ td {
     background: #e1e7e1;
 }
 
-.favourite-icon.active {
-    background: #000;
-    color: #fff;
-}
+    .favourite-icon.active {
+        background: #7cdb6b;
+        color: #fff;
+    }
 
 .favourite-icon.active:hover {
     background: #626262;
@@ -71,10 +71,13 @@ td {
     margin: 0.3em .5rem 0.7em 0px;
 }
 
-.status.open {
-    color: #1ca94c;
-    background: #eafbe7;
-}
+    .status.open {
+        color: #7cdb6b;
+    }
+
+    .status.closed {
+        color: #db6b6b;
+    }
 
 .information-divider {
     text-align: center;
@@ -89,3 +92,27 @@ td {
     font-size: 0.95rem;
     margin: 0.4em 0 0.7em 0;
 }
+
+.toast {
+    display:block;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    z-index: 10000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 1.1rem;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+    .toast.success {
+        background: #5ecd4a;
+    }
+
+    .toast.failure {
+        background: #db6b6b;
+    }

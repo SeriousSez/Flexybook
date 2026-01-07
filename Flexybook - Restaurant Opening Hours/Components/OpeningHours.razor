@@ -6,7 +6,7 @@
     <h2>Opening hours</h2>
     <div class="tabs-scroll">
         <div class="tabs-inner">
-            @foreach (var type in Types)
+            @foreach (var type in AvailableTypes)
             {
                 <button type="button" class="tab @(SelectedType == type ? "active" : "")" @onclick="() => SetType(type)">
                     @GetTypeLabel(type)
@@ -31,13 +31,8 @@
 
     private OpeningHourType SelectedType { get; set; } = OpeningHourType.Restaurant;
 
-    private static readonly OpeningHourType[] Types = new[]
-    {
-        OpeningHourType.Restaurant,
-        OpeningHourType.Takeaway,
-        OpeningHourType.Buffet,
-        OpeningHourType.SpecialEventForGroups
-    };
+    private IEnumerable<OpeningHourType> AvailableTypes =>
+        Hours.Select(h => h.Type).Distinct();
 
     private void SetType(OpeningHourType type) => SelectedType = type;
 
@@ -49,4 +44,12 @@
         OpeningHourType.SpecialEventForGroups => "Special Events for Groups",
         _ => type.ToString()
     };
+
+    protected override void OnParametersSet()
+    {
+        if (!AvailableTypes.Contains(SelectedType) && AvailableTypes.Any())
+        {
+            SelectedType = AvailableTypes.First();
+        }
+    }
 }

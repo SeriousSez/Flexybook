@@ -1,17 +1,16 @@
-﻿
+﻿@using Flexybook.Domain.Responses.Restaurant
+
 <div class="contact-row">
-    <a href="tel:+45-11-22-33-44" class="contact-block" title="Telephone">
+    <a href="tel:@Telephone" class="contact-block" title="Telephone">
         <svg width="25" height="25" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="8" y="6" width="22" height="34" rx="3" stroke="#7cdb6b" stroke-width="2" fill="none" />
             <rect x="15" y="34" width="8" height="2" rx="1.5" fill="#7cdb6b" />
         </svg>
-        @* <a href="tel:+45-11-22-33-44" class="contact-tel" title="Telephone">+45 11 22 33 44</a> *@
-        <span class="contact-tel">+45 11 22 33 44</span>
+        <span class="contact-tel">@Telephone</span>
     </a>
-    <a href="mailto:aalborg@flexybox.com" class="contact-block" title="Email">
+    <a href="mailto:@Email" class="contact-block" title="Email">
         <span class="icon contact-mail">&#64</span>
-        @* <a href="mailto:aalborg@flexybox.com" class="contact-email" title="Email">aalborg@flexybox.com</a> *@
-        <span class="contact-email">aalborg@flexybox.com</span>
+        <span class="contact-email">@Email</span>
     </a>
     <div class="contact-block">
         <svg width="25" height="25" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,3 +22,10 @@
         </svg>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public string Telephone { get; set; } = "";
+    [Parameter]
+    public string Email { get; set; } = "";
+}

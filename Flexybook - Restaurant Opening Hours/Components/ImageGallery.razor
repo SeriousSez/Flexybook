@@ -1,6 +1,22 @@
-﻿<div>
+﻿@using Flexybook.Domain.Responses.Restaurant
+@if (Images != null && Images.Any())
+{
+    <div class="image-gallery-inner">
+        @foreach (var image in Images)
+        {
+            <img src="@image.Url" alt="Restaurant image" class="image" />
+        }
+    </div>
+}
+else
+{
     <div class="image-gallery-inner">
         <img src="/images/restaurant-interior.jpg" alt="Restaurant interior" class="image" />
         <img src="/images/lee-campbell.jpg" alt="Restaurant view" class="image" />
     </div>
-</div>
+}
+
+@code {
+    [Parameter]
+    public List<ImageResponse>? Images { get; set; }
+}

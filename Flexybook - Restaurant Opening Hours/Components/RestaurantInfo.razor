@@ -3,6 +3,12 @@
 @using Flexybook.Domain.Responses.Restaurant
 @inject IRestaurantService RestaurantService
 @inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+@if (!string.IsNullOrEmpty(ToastMessage))
+{
+    <div class="toast @(ToastSuccess ? "success" : "failure")">@ToastMessage</div>
+}
 
 @if (restaurant == null)
 {
@@ -14,16 +20,16 @@ else
         <div class="header">
             <div class="title-row">
                 <h1 class="restaurant-title">@restaurant.Name</h1>
-                <span class="favourite-icon active">&#9825;</span>
+                <span class="favourite-icon @(restaurant.IsFavourite ? "active" : "")" @onclick="ToggleFavouriteAsync" style="cursor:pointer;">&#9825;</span>
             </div>
             <div class="information-row">
-                <span class="status">• Open</span>
+                <span class="status @(IsOpen ? "open" : "closed")">• @(IsOpen ? "Open" : "Closed")</span>
                 <div class="information-divider">·</div>
                 <div class="address">@restaurant.Address · @restaurant.City</div>
             </div>
-            <ContactInfo />
+            <ContactInfo Telephone="@restaurant.Telephone" Email="@restaurant.Email" />
         </div>
-        <ImageGallery />
+        <ImageGallery Images="@restaurant.Images" />
         <OpeningHours Hours="@restaurant.OpeningHours" />
     </div>
 }
@@ -32,9 +38,60 @@ else
     [Parameter]
     public Guid Id { get; set; }
     private RestaurantResponse? restaurant;
+    private string ToastMessage { get; set; } = "";
+    private bool ToastSuccess { get; set; }
+    private bool IsOpen { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        restaurant = await RestaurantService.Get(Id);
+        restaurant = await RestaurantService.GetAsync(Id);
+        if (restaurant is null)
+            return;
+
+        IsRestaurantOpen(restaurant.OpeningHours);
+    }
+
+    private async Task ToggleFavouriteAsync()
+    {
+        if (restaurant is null)
+            return;
+
+        restaurant.IsFavourite = !restaurant.IsFavourite;
+        var success = await RestaurantService.UpdateAsync(restaurant);
+        if (success)
+        {
+            ToastSuccess = true;
+            ToastMessage = restaurant.IsFavourite ? "Department has been added as a favorite" : "Department has been removed as a favorite";
+        }
+        else
+        {
+            ToastSuccess = false;
+            ToastMessage = "Department could not be added as a favourite";
+        }
+        await Task.Delay(3000);
+        ToastMessage = string.Empty;
+        StateHasChanged();
+    }
+
+    private void IsRestaurantOpen(IEnumerable<OpeningHourResponse> openingHours)
+    {
+        var now = DateTime.Now;
+        var today = now.DayOfWeek;
+
+        var todayHours = openingHours
+            .Where(h => h.DayOfWeek == today && !h.IsClosed)
+            .FirstOrDefault();
+
+        if (todayHours == null)
+        {
+            IsOpen = false;
+            return;
+        }
+
+        var openTime = todayHours.OpenTime;
+        var closeTime = todayHours.CloseTime;
+
+        var currentTime = now.TimeOfDay;
+        IsOpen = currentTime >= openTime && currentTime <= closeTime;
     }
 }

@@ -39,6 +39,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        restaurants = await RestaurantService.GetAll();
+        restaurants = await RestaurantService.GetAllAsync();
     }
 }
