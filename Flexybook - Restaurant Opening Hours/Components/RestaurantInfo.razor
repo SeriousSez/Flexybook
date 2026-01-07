@@ -1,16 +1,40 @@
-<div class="restaurant-card">
-    <div class="header">
-        <div class="title-row">
-            <h1 class="restaurant-title">Aalborg</h1>
-            <span class="favourite-icon active">&#9825;</span>
+@page "/restaurant/{Id:guid}"
+@using Flexybook.ApplicationService.Services
+@using Flexybook.Domain.Responses.Restaurant
+@inject IRestaurantService RestaurantService
+@inject NavigationManager NavigationManager
+
+@if (restaurant == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="restaurant-card">
+        <div class="header">
+            <div class="title-row">
+                <h1 class="restaurant-title">@restaurant.Name</h1>
+                <span class="favourite-icon active">&#9825;</span>
+            </div>
+            <div class="information-row">
+                <span class="status">• Open</span>
+                <div class="information-divider">·</div>
+                <div class="address">@restaurant.Address · @restaurant.City</div>
+            </div>
+            <ContactInfo />
         </div>
-        <div class="information-row">
-            <span class="status">• Open</span>
-            <div class="information-divider">·</div>
-            <div class="address">Østergade 27, 9000 · Aalborg</div>
-        </div>
-        <ContactInfo />
+        <ImageGallery />
+        <OpeningHours Hours="@restaurant.OpeningHours" />
     </div>
-    <ImageGallery />
-    <OpeningHours />
-</div>
+}
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    private RestaurantResponse? restaurant;
+
+    protected override async Task OnInitializedAsync()
+    {
+        restaurant = await RestaurantService.Get(Id);
+    }
+}

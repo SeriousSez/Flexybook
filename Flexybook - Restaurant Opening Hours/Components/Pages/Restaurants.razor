@@ -1,7 +1,11 @@
+@page "/"
 @page "/restaurants"
 @using Flexybook.ApplicationService.Services
 @using Flexybook.Domain.Responses.Restaurant
 @inject IRestaurantService RestaurantService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Restaurants</PageTitle>
 
 <h1>Restaurants</h1>
 
@@ -18,12 +22,14 @@ else
     <div class="restaurant-list">
         @foreach (var restaurant in restaurants)
         {
-            <div class="restaurant-card">
-                <h2>@restaurant.Name</h2>
-                <div>@restaurant.Address</div>
-                <div>@restaurant.Telephone</div>
-                <div>@restaurant.Email</div>
-            </div>
+            <NavLink href="@($"/restaurant/{restaurant.Id}")" style="text-decoration: none;">
+                <div class="restaurant-card">
+                    <h2>@restaurant.Name</h2>
+                    <div>@restaurant.Address</div>
+                    <div>@restaurant.Telephone</div>
+                    <div>@restaurant.Email</div>
+                </div>
+            </NavLink>
         }
     </div>
 }

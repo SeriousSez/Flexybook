@@ -1,18 +1,52 @@
-﻿<div class="opening-hours-section">
+﻿@using Flexybook.Domain.Responses.Restaurant
+@using Flexybook.Domain
+@using Flexybook___Restaurant_Opening_Hours.Helpers
+@rendermode InteractiveServer
+<div class="opening-hours-section">
     <h2>Opening hours</h2>
     <div class="tabs-scroll">
         <div class="tabs-inner">
-            <button class="tab active">Restaurant</button>
-            <button class="tab">Takeaway</button>
-            <button class="tab">Buffet</button>
-            <button class="tab">Special Events for Groups</button>
+            @foreach (var type in Types)
+            {
+                <button type="button" class="tab @(SelectedType == type ? "active" : "")" @onclick="() => SetType(type)">
+                    @GetTypeLabel(type)
+                </button>
+            }
         </div>
     </div>
     <table class="hours-table">
-        <tr><td>Monday - Thursday</td><td class="hours">07:00 - 22:00</td></tr>
-        <tr><td>Friday</td><td class="hours">07:00 - 22:00</td></tr>
-        <tr><td>Saturday</td><td class="hours">07:00 - 22:00</td></tr>
-        <tr><td>Sunday</td><td class="hours">07:00 - 22:00</td></tr>
-        <tr><td><span class="holiday">Holidays</span></td><td class="hours">Closed</td></tr>
+        @foreach (var row in OpeningHoursDisplayHelper.GetDisplayRows(Hours.Where(h => h.Type == SelectedType).ToList()))
+        {
+            <tr class="hours-row">
+                <td>@row.Label</td>
+                <td class="hours">@row.Hours</td>
+            </tr>
+        }
     </table>
 </div>
+
+@code {
+    [Parameter]
+    public List<OpeningHourResponse> Hours { get; set; } = new();
+
+    private OpeningHourType SelectedType { get; set; } = OpeningHourType.Restaurant;
+
+    private static readonly OpeningHourType[] Types = new[]
+    {
+        OpeningHourType.Restaurant,
+        OpeningHourType.Takeaway,
+        OpeningHourType.Buffet,
+        OpeningHourType.SpecialEventForGroups
+    };
+
+    private void SetType(OpeningHourType type) => SelectedType = type;
+
+    private string GetTypeLabel(OpeningHourType type) => type switch
+    {
+        OpeningHourType.Restaurant => "Restaurant",
+        OpeningHourType.Takeaway => "Takeaway",
+        OpeningHourType.Buffet => "Buffet",
+        OpeningHourType.SpecialEventForGroups => "Special Events for Groups",
+        _ => type.ToString()
+    };
+}
