@@ -1,71 +1,73 @@
-﻿.opening-hours-section {
-    margin-top: 1.2em;
-}
+﻿@media (max-width: 768px) {
+    .opening-hours-section {
+        margin-top: 1.2em;
+    }
 
-.tabs-scroll {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 0.5em;
-    margin-top: 1em;
-    margin-bottom: 0.7em;
-    white-space: nowrap;
-}
+    .tabs-scroll {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.5em;
+        margin-top: 1em;
+        margin-bottom: 0.7em;
+        white-space: nowrap;
+    }
 
-.tabs-scroll::-webkit-scrollbar {
-    display: none;
-}
+        .tabs-scroll::-webkit-scrollbar {
+            display: none;
+        }
 
 
 
-.tab {
-    background: #f3f3f3;
-    border: none;
-    border-radius: 20px;
-    padding: 0.4em 1em;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #222;
-    transition: background 0.2s;
-}
+    .tab {
+        background: #f3f3f3;
+        border: none;
+        border-radius: 20px;
+        padding: 0.4em 1em;
+        font-size: 1rem;
+        cursor: pointer;
+        color: #222;
+        transition: background 0.2s;
+    }
 
-.tab.active,
-.tab:hover {
-    background: #000;
-    color: #fff;
-}
+        .tab.active,
+        .tab:hover {
+            background: #000;
+            color: #fff;
+        }
 
-.tab.active:hover {
-    background: #626262;
-    color: #fff;
-}
+            .tab.active:hover {
+                background: #626262;
+                color: #fff;
+            }
 
-.hours-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.98rem;
-}
+    .hours-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.98rem;
+    }
 
-.hours-table td {
-    padding: 0.3em 0.2em;
-}
+        .hours-table td {
+            padding: 0.3em 0.2em;
+        }
 
-.hours-table table {
-    line-height: 1rem;
-}
+        .hours-table table {
+            line-height: 1rem;
+        }
 
-.hours-row {
-    transition: background 0.2s, color 0.2s;
-}
+    .hours-row {
+        transition: background 0.2s, color 0.2s;
+    }
 
-.hours-row:hover {
-    background: #f5f5f5;
-    color: #222;
-}
+        .hours-row:hover {
+            background: #f5f5f5;
+            color: #222;
+        }
 
-.hours {
-    color: #333;
-    text-align: right;
+    .hours {
+        color: #333;
+        text-align: right;
+    }
 }
