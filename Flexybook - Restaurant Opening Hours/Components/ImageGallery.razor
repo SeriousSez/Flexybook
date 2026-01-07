@@ -19,4 +19,12 @@ else
 @code {
     [Parameter]
     public List<ImageResponse>? Images { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("enableGalleryDragScroll");
+    }
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
 }

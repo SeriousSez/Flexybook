@@ -4,7 +4,7 @@
 @rendermode InteractiveServer
 <div class="opening-hours-section">
     <h2>Opening hours</h2>
-    <div class="tabs-scroll">
+    <div class="tabs-scroll" @ref="tabsScrollRef">
         <div class="tabs-inner">
             @foreach (var type in AvailableTypes)
             {
@@ -52,4 +52,13 @@
             SelectedType = AvailableTypes.First();
         }
     }
+    private ElementReference tabsScrollRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("enableHorizontalWheelScroll", tabsScrollRef);
+    }
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
 }
