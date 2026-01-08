@@ -1,9 +1,14 @@
-using Flexybook___Restaurant_Opening_Hours.Components;
-using Microsoft.EntityFrameworkCore;
-using Flexybook___Restaurant_Opening_Hours.Extensions;
 using Flexybook.ApplicationService.Extensions;
-using Flexybook.Infrastructure.Extensions;
+using Flexybook.Domain.Entities;
 using Flexybook.Infrastructure;
+using Flexybook.Infrastructure.Extensions;
+using Flexybook___Restaurant_Opening_Hours.Components;
+using Flexybook___Restaurant_Opening_Hours.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +18,43 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<RestaurantContext>(options =>
     options.UseInMemoryDatabase("FlexybookDb"));
 
-// Register all infrastructure services via extension
+builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+})
+.AddEntityFrameworkStores<RestaurantContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddInfrastructureServices();
-// Register all application services via extension
 builder.Services.AddServices();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+        ValidAudience = jwtSettings.GetSection("validAudience").Value,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
+    };
+});
 
 var app = builder.Build();
 
 // Use facade extension method from ApplicationService to seed database
-app.SeedDatabase();
+await app.SeedDatabaseAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

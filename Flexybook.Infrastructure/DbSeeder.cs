@@ -1,12 +1,34 @@
 using Flexybook.Domain;
+using Flexybook.Domain.Entities;
 using Flexybook.Domain.Entities.Restaurant;
+using Microsoft.AspNetCore.Identity;
 
 namespace Flexybook.Infrastructure
 {
     public static class DbSeeder
     {
-        public static void Seed(RestaurantContext db)
+        public static async Task SeedAsync(RestaurantContext db, UserManager<UserEntity> userManager)
         {
+            // Seed User
+            var existingUser = await userManager.FindByNameAsync("Flexybook");
+            if (existingUser == null)
+            {
+                var user = new UserEntity
+                {
+                    UserName = "Flexybook",
+                    Email = "flexybook@example.com",
+                    FirstName = "Flexy",
+                    LastName = "Book",
+                    Created = DateTime.Now,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(user, "Flexybook1234");
+                if (!result.Succeeded)
+                {
+                    throw new Exception($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+            }
             // Aalborg
             var restaurantAalborgId = Guid.NewGuid();
             var restaurantAalborg = new Restaurant
@@ -17,7 +39,6 @@ namespace Flexybook.Infrastructure
                 City = "Aalborg",
                 Telephone = "+45 11 22 33 44",
                 Email = "aalborg@flexybox.com",
-                IsFavourite = false
             };
             var imagesAalborg = new List<Image>
             {
@@ -75,7 +96,6 @@ namespace Flexybook.Infrastructure
                 City = "Odense",
                 Telephone = "+45 52 82 82 21",
                 Email = "odense@flexybox.com",
-                IsFavourite = true
             };
             var imagesOdense = new List<Image>
             {

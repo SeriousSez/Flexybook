@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Flexybook.Domain\Flexybook.Domain.csproj" />
     <ProjectReference Include="..\Flexybook.Infrastructure\Flexybook.Infrastructure.csproj" />
   </ItemGroup>

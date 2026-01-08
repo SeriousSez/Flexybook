@@ -9,7 +9,6 @@ namespace Flexybook.Domain.Responses.Restaurant
         public required string City { get; set; }
         public required string Telephone { get; set; }
         public required string Email { get; set; }
-        public required bool IsFavourite { get; set; }
         public List<ImageResponse>? Images { get; set; }
         public List<OpeningHourResponse> OpeningHours { get; set; } = new();
 
@@ -25,7 +24,6 @@ namespace Flexybook.Domain.Responses.Restaurant
                 City = this.City,
                 Telephone = this.Telephone,
                 Email = this.Email,
-                IsFavourite = this.IsFavourite,
             };
             restaurant.Images = this.Images?.Select(i => i.ToEntity(restaurant)).ToList();
             restaurant.OpeningHours = this.OpeningHours.Select(i => i.ToEntity(restaurant)).ToList();
