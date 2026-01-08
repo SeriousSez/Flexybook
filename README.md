@@ -1,5 +1,20 @@
 # Flexybook
 
+> **Note:** This project was created for evaluation and testing purposes by the company **FlexyBox ApS**.
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="docs/screenshots/desktop-restaurants.png" alt="Desktop Restaurants" width="400" /></td>
+      <td><img src="docs/screenshots/desktop-restaurant-details.png" alt="Desktop Restaurant Details" width="400" /></td>
+    </tr>
+    <tr>
+      <td><img src="docs/screenshots/mobile-restaurants.png" alt="Mobile Restaurants" width="200" /></td>
+      <td><img src="docs/screenshots/mobile-restaurant-details.png" alt="Mobile Restaurant Details" width="200" /></td>
+    </tr>
+  </table>
+</div>
+
 A modern web application for displaying restaurant information, opening hours, contact details, and image galleries. Built with Blazor Server and ASP.NET Core Identity.
 
 ## 📖 About The Project
@@ -164,7 +179,7 @@ Major phases included removing Bootstrap entirely, implementing custom authentic
 - **Blazor Lifecycle is crucial**: Understanding when components render and re-render is fundamental
 - **Separation of Concerns matters**: Refactoring to clean architecture made the code much more maintainable
 - **User feedback is essential**: Loading states and error handling dramatically improve UX
-- **Mobile-first responsive design**: Should have started with mobile layout first
+- **Mobile-first responsive design**: Mobile layout was implemented first, ensuring a great experience on all devices
 - **Documentation as you go**: Writing XML comments while coding is easier than adding them later
 
 ## 🗂️ Project Structure
@@ -218,7 +233,7 @@ Flexybook-Restaurant-Opening-Hours/
 The application will:
 
 - Automatically seed the database with demo data
-- Auto-login as user "Flexybook"
+- Let you click the Login button to automatically log in as the seeded user (no credentials required)
 - Open in your default browser
 
 ### Default Credentials
@@ -299,8 +314,8 @@ The codebase underwent comprehensive cleanup following best practices:
 
 ## 📄 License
 
-This is a demonstration project for learning purposes.
+This project was created as an assignment for a job application at FlexyBox ApS. It is not intended for production use or general distribution.
 
 ## 🙏 Acknowledgments
 
-Built as a learning project to explore Blazor Server, Clean Architecture, and modern ASP.NET Core development patterns.
+Developed specifically as part of a job application assignment for FlexyBox ApS, to demonstrate skills in Blazor Server, Clean Architecture, and modern ASP.NET Core development patterns.
