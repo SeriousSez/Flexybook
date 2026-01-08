@@ -2,6 +2,99 @@ body {
     background: #fdf6f8;
 }
 
+.skeleton-container {
+    pointer-events: none;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-header {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skeleton-title {
+    height: 2.5rem;
+    width: 60%;
+    margin-top: 1rem;
+}
+
+.skeleton-contact-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 1.7rem 0;
+}
+
+.skeleton-text {
+    height: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-contact {
+    height: 2.4rem;
+    width: 150px;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.skeleton-gallery {
+    height: 300px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: .1rem;
+}
+
+.skeleton-opening-hours {
+    width: 100%;
+    margin-top: 3rem;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 1rem 2rem 1.7rem 2rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.skeleton-day-time {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+}
+
+.contact-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.information-divider {
+    color: #ccc;
+    font-size: 1.2rem;
+    margin: 0 0.3rem;
+}
+
 .toast {
     display: block;
     position: fixed;
@@ -263,5 +356,53 @@ body {
         color: #666666;
         font-size: 0.95rem;
         margin: 0.4em 0 0.7em 0;
+    }
+
+    .skeleton-title {
+        height: 1.875rem;
+        width: 70%;
+        margin-bottom: 2.2rem;
+    }
+
+    .skeleton-text {
+        height: 1rem;
+        margin-right: 1rem;
+    }
+
+    .skeleton-contact-row {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .skeleton-contact {
+        height: 30px;
+        width: 100px;
+        border-radius: 8px;
+    }
+
+    .skeleton-gallery {
+        height: 175px;
+        margin: 1rem 0;
+    }
+
+    .skeleton-opening-hours {
+        width: 100%;
+        margin-top: 0;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: none;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .contact-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: flex-start;
+        height: 35px;
     }
 }

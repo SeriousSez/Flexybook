@@ -16,9 +16,42 @@
     <div class="toast @(ToastSuccess ? "success" : "failure")">@ToastMessage</div>
 }
 
-@if (restaurant == null)
+@if (restaurant is null || isLoading)
 {
-    <p>Loading...</p>
+    <div class="restaurant-card skeleton-container">
+        <div class="skeleton-header">
+            <div class="title-row">
+                <div class="skeleton skeleton-title"></div>
+            </div>
+            <div class="information-row">
+                <div class="skeleton skeleton-text" style="width: 70px; height: 1.1rem;"></div>
+                <div class="skeleton skeleton-text" style="width: 280px; height: 1.08rem;"></div>
+            </div>
+            <div class="skeleton-contact-row">
+                <div class="skeleton skeleton-contact"></div>
+                <div class="skeleton skeleton-contact"></div>
+                <div class="skeleton skeleton-contact"></div>
+            </div>
+        </div>
+        <div class="skeleton skeleton-gallery"></div>
+        <div class="mobile-divider"></div>
+        <div class="skeleton-opening-hours">
+            <div class="skeleton skeleton-text" style="width: 140px; height: 1rem; margin-bottom: 2rem;"></div>
+            <div style="margin-bottom: 1.2rem; display: flex; gap: .5rem;">
+                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
+                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
+                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
+            </div>
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="skeleton-day-time">
+                    <div class="skeleton skeleton-text skeleton-day" style="width: 140px; height: 1.08rem;"></div>
+                    <div class="skeleton skeleton-text skeleton-time" style="width: 110px; height: 1.08rem;"></div>
+                </div>
+            }
+        </div>
+        <div class="mobile-divider"></div>
+    </div>
 }
 else
 {
@@ -54,18 +87,31 @@ else
     private bool IsOpen { get; set; }
     private bool isFavourite = false;
     private bool isAuthenticated = false;
+    private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
         restaurant = await RestaurantService.GetAsync(Id);
         if (restaurant is null)
+        {
+            isLoading = false;
             return;
+        }
 
         IsRestaurantOpen(restaurant.OpeningHours);
-        await CheckAuthenticationAndFavourites();
-        
+
         // Subscribe to authentication state changes
         AuthenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CheckAuthenticationAndFavourites();
+            isLoading = false;
+            await InvokeAsync(StateHasChanged);
+        }
     }
 
     private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
@@ -78,7 +124,7 @@ else
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         isAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
-        
+
         if (isAuthenticated)
         {
             await CheckIfFavourite();
@@ -123,17 +169,15 @@ else
             return;
         }
 
-        isFavourite = !isFavourite;
-        var success = await UserService.UpdateUserFavouritesAsync(userId, restaurant.Id, isFavourite);
-        
+        var success = await UserService.UpdateUserFavouritesAsync(userId, restaurant.Id, !isFavourite);
         if (success)
         {
+            isFavourite = !isFavourite;
             ToastSuccess = true;
             ToastMessage = isFavourite ? "Restaurant has been added as a favorite" : "Restaurant has been removed as a favorite";
         }
         else
         {
-            isFavourite = !isFavourite; // Revert on failure
             ToastSuccess = false;
             ToastMessage = "Restaurant could not be updated as a favourite";
         }
