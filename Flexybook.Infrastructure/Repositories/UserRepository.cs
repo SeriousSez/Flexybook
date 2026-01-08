@@ -18,14 +18,13 @@ namespace Flexybook.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Retrieves a user by ID including their favourite restaurants.
+        /// Retrieves a user by ID.
         /// </summary>
         /// <param name="id">The unique identifier of the user.</param>
         /// <returns>The user entity if found; otherwise, null.</returns>
         public virtual async Task<UserEntity?> GetAsync(Guid id)
         {
             return await _dbSet
-                .Include(u => u.FavouredRestaurants)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(u => u.Id == id.ToString());
         }
