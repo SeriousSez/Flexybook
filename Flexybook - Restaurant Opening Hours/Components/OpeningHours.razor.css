@@ -1,4 +1,9 @@
-﻿@media (min-width: 900px) {
+﻿span,
+td {
+    color: #666666;
+}
+
+@media (min-width: 900px) {
     .opening-hours-section {
         width: 100%;
         margin-top: 1.5rem;
@@ -43,8 +48,7 @@
         transition: background 0.2s;
     }
 
-    .tab.active,
-    .tab:hover {
+    .tab.active {
         background: #000;
         color: #fff;
     }
@@ -109,14 +113,8 @@
         transition: background 0.2s;
     }
 
-    .tab.active,
-    .tab:hover {
+    .tab.active {
         background: #000;
-        color: #fff;
-    }
-
-    .tab.active:hover {
-        background: #626262;
         color: #fff;
     }
 

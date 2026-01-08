@@ -26,6 +26,10 @@ body {
     background: #db6b6b;
 }
 
+.mobile-divider {
+    display: none;
+}
+
 @media (min-width: 900px) {
     .restaurant-card {
         margin-top: 100px;
@@ -174,6 +178,13 @@ body {
 }
 
 @media (max-width: 768px) {
+    .mobile-divider {
+        display: block;
+        height: 1px;
+        background: #e5e5e5;
+        margin: 1.5rem 0;
+    }
+
     h1 {
         font-size: 30px;
         font-weight: 600;
