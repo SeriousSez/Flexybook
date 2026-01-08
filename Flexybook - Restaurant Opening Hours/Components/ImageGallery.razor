@@ -1,4 +1,6 @@
 ﻿@using Flexybook.Domain.Responses.Restaurant
+@inject IJSRuntime JS
+
 @if (Images != null && Images.Any())
 {
     <div class="image-gallery-inner">
@@ -24,7 +26,4 @@ else
     {
         await JS.InvokeVoidAsync("enableGalleryDragScroll");
     }
-
-    [Inject]
-    private IJSRuntime JS { get; set; } = default!;
 }

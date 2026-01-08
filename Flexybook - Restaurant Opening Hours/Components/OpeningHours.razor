@@ -1,7 +1,9 @@
 ﻿@using Flexybook.Domain.Responses.Restaurant
 @using Flexybook.Domain
 @using Flexybook___Restaurant_Opening_Hours.Helpers
+@inject IJSRuntime JS
 @rendermode InteractiveServer
+
 <div class="opening-hours-section">
     <h2>Opening hours</h2>
     <div class="tabs-scroll" @ref="tabsScrollRef">
@@ -29,10 +31,24 @@
     [Parameter]
     public List<OpeningHourResponse> Hours { get; set; } = new();
 
+    private ElementReference tabsScrollRef;
     private OpeningHourType SelectedType { get; set; } = OpeningHourType.Restaurant;
 
     private IEnumerable<OpeningHourType> AvailableTypes =>
         Hours.Select(h => h.Type).Distinct();
+
+    protected override void OnParametersSet()
+    {
+        if (!AvailableTypes.Contains(SelectedType) && AvailableTypes.Any())
+        {
+            SelectedType = AvailableTypes.First();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("enableHorizontalWheelScroll", tabsScrollRef);
+    }
 
     private void SetType(OpeningHourType type) => SelectedType = type;
 
@@ -44,21 +60,4 @@
         OpeningHourType.SpecialEventForGroups => "Special Events for Groups",
         _ => type.ToString()
     };
-
-    protected override void OnParametersSet()
-    {
-        if (!AvailableTypes.Contains(SelectedType) && AvailableTypes.Any())
-        {
-            SelectedType = AvailableTypes.First();
-        }
-    }
-    private ElementReference tabsScrollRef;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JS.InvokeVoidAsync("enableHorizontalWheelScroll", tabsScrollRef);
-    }
-
-    [Inject]
-    private IJSRuntime JS { get; set; } = default!;
 }

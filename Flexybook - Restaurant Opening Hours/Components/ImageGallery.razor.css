@@ -1,4 +1,5 @@
-﻿@media (min-width: 900px) {
+/* Desktop Styles */
+@media (min-width: 900px) {
     .image-gallery-inner {
         display: flex;
         flex-direction: row;
@@ -29,6 +30,7 @@
     }
 }
 
+/* Mobile Styles */
 @media (max-width: 899px) {
     .image-gallery-inner {
         display: flex;

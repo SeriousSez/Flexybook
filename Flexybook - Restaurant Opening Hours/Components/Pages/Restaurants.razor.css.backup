@@ -1,0 +1,287 @@
+@media (min-width: 900px) {
+    .skeleton-container {
+        pointer-events: none;
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite;
+        border-radius: 4px;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .skeleton-title {
+        height: 2rem;
+        width: 70%;
+        margin-bottom: 0.8rem;
+    }
+
+    .skeleton-text {
+        height: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skeleton-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin: 3rem 0 3rem 0;
+        color: #222;
+        position: relative;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #7cdb6b, #5ab848);
+        border-radius: 2px;
+    }
+
+    .restaurant-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+    }
+
+    .restaurant-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        text-decoration: none !important;
+        color: #222 !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .restaurant-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-6px);
+        border-color: #7cdb6b;
+    }
+
+    .restaurant-image {
+        width: 100%;
+        height: 220px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .restaurant-content {
+        padding: 1.5rem 1.8rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .restaurant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+    }
+
+    .restaurant-card h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #222;
+        font-weight: 600;
+    }
+
+    .status {
+        font-size: 0.95rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status.open {
+        color: #7cdb6b;
+    }
+
+    .status.closed {
+        color: #e94a5a;
+    }
+
+    .restaurant-info {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0.4rem;
+    }
+
+    .restaurant-email {
+        color: #7cdb6b;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 899px) {
+    .skeleton-container {
+        pointer-events: none;
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite;
+        border-radius: 4px;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .skeleton-title {
+        height: 1.5rem;
+        width: 70%;
+        margin-bottom: 0.8rem;
+    }
+
+    .skeleton-text {
+        height: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skeleton-image {
+        width: 100%;
+        height: 150px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 2rem 0 2rem 0;
+        color: #222;
+        position: relative;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #7cdb6b, #5ab848);
+        border-radius: 2px;
+    }
+
+    .restaurant-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .restaurant-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        text-decoration: none !important;
+        color: #222 !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .restaurant-card:active {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transform: scale(0.98);
+        border-color: #7cdb6b;
+    }
+
+    .restaurant-image {
+        width: 100%;
+        height: 180px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .restaurant-content {
+        padding: 1.2rem 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .restaurant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.7rem;
+    }
+
+    .restaurant-card h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #222;
+        font-weight: 600;
+    }
+
+    .status {
+        font-size: 0.9rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status.open {
+        color: #7cdb6b;
+    }
+
+    .status.closed {
+        color: #e94a5a;
+    }
+
+    .restaurant-info {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 0.35rem;
+    }
+
+    .restaurant-email {
+        color: #7cdb6b;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+    }
+}

@@ -19,9 +19,4 @@
     <ProjectReference Include="..\Flexybook.Domain\Flexybook.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="wwwroot\lib\" />
-  </ItemGroup>
-
 </Project>
