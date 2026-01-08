@@ -1,6 +1,7 @@
 @page "/"
 @using Flexybook.ApplicationService.Services
 @using Flexybook.Domain.Responses.Restaurant
+@using Flexybook.Domain
 @inject IRestaurantService RestaurantService
 @inject NavigationManager NavigationManager
 
@@ -21,12 +22,21 @@ else
     <div class="restaurant-list">
         @foreach (var restaurant in restaurants)
         {
+            var isOpen = IsRestaurantOpen(restaurant);
+            var firstImage = restaurant.Images?.FirstOrDefault()?.Url ?? "/images/restaurant-interior.jpg";
+            
             <NavLink href="@($"/restaurant/{restaurant.Id}")" style="text-decoration: none;">
                 <div class="restaurant-card">
-                    <h2>@restaurant.Name</h2>
-                    <div>@restaurant.Address</div>
-                    <div>@restaurant.Telephone</div>
-                    <div>@restaurant.Email</div>
+                    <div class="restaurant-image" style="background-image: url('@firstImage');"></div>
+                    <div class="restaurant-content">
+                        <div class="restaurant-header">
+                            <h2>@restaurant.Name</h2>
+                            <span class="status @(isOpen ? "open" : "closed")">• @(isOpen ? "Open" : "Closed")</span>
+                        </div>
+                        <div class="restaurant-info">@restaurant.Address</div>
+                        <div class="restaurant-info">@restaurant.Telephone</div>
+                        <div class="restaurant-email">@restaurant.Email</div>
+                    </div>
                 </div>
             </NavLink>
         }
@@ -39,5 +49,20 @@ else
     protected override async Task OnInitializedAsync()
     {
         restaurants = await RestaurantService.GetAllAsync();
+    }
+
+    private bool IsRestaurantOpen(RestaurantResponse restaurant)
+    {
+        var now = DateTime.Now;
+        var today = now.DayOfWeek;
+        var currentTime = now.TimeOfDay;
+
+        var todayHours = restaurant.OpeningHours?
+            .Where(h => h.Type == OpeningHourType.Restaurant && h.DayOfWeek == today)
+            .FirstOrDefault();
+
+        if (todayHours == null) return false;
+        
+        return currentTime >= todayHours.OpenTime && currentTime <= todayHours.CloseTime;
     }
 }

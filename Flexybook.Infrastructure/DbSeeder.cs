@@ -79,18 +79,20 @@ namespace Flexybook.Infrastructure
             };
             var imagesOdense = new List<Image>
             {
-                new Image { Id = Guid.NewGuid(), Url = "/images/restaurant-interior.jpg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new Image { Id = Guid.NewGuid(), Url = "/images/lee-campbell.jpg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense }
+                new Image { Id = Guid.NewGuid(), Url = "/images/food.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Url = "/images/food2.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Url = "/images/food3.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Url = "/images/fancy-interior.jpg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense }
             };
             var openingHoursOdense = new List<OpeningHour>
             {
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Monday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Tuesday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Wednesday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Thursday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Friday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Saturday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Sunday, OpenTime = new TimeSpan(7,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Monday, OpenTime = new TimeSpan(10,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Tuesday, OpenTime = new TimeSpan(10,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Wednesday, OpenTime = new TimeSpan(10,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Thursday, OpenTime = new TimeSpan(8,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Friday, OpenTime = new TimeSpan(8,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Saturday, OpenTime = new TimeSpan(8,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, DayOfWeek = DayOfWeek.Sunday, OpenTime = new TimeSpan(8,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
                 new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Restaurant, IsClosed = true, RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
 
                 new OpeningHour { Id = Guid.NewGuid(), Type = OpeningHourType.Takeaway, DayOfWeek = DayOfWeek.Monday, OpenTime = new TimeSpan(12,0,0), CloseTime = new TimeSpan(22,0,0), IsClosed = false, RestaurantId = restaurantAalborgId, Restaurant = restaurantAalborg },

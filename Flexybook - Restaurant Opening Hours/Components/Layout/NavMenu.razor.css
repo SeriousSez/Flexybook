@@ -1,6 +1,5 @@
 .flexy-navbar {
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     padding: 0;
     position: sticky;
     top: 0;
@@ -36,24 +35,39 @@
 }
 
 .navbar-menu ::deep a {
-    color: #fff !important;
+    color: #fff;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    transition: all 0.2s;
+    padding: 0.75rem 1.25rem;
     background: transparent;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
 .navbar-menu ::deep a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff !important;
+    color: #fff;
+    cursor: pointer;
 }
 
-.navbar-menu ::deep a.active {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff !important;
+.navbar-menu ::deep a:hover::after {
+    width: 100%;
+}
+
+.navbar-menu ::deep a.active::after {
+    width: 100%;
+    background: #fff;
+}
+
+.navbar-menu ::deep a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #fff;
+    transition: width 0.5s ease;
 }
 
 .navbar-toggler {

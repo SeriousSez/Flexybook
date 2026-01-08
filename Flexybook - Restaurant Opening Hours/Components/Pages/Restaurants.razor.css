@@ -1,102 +1,108 @@
-.restaurants-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2.5rem 2rem 0 2rem;
-}
+@media (min-width: 900px) {
+    h1 {
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin: 3rem 0 3rem 0;
+        color: #222;
+        position: relative;
+    }
 
-.restaurants-heading {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
-    color: #222;
-}
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #7cdb6b, #5ab848);
+        border-radius: 2px;
+    }
 
-.restaurant-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.5rem 2rem;
-    justify-content: center;
-    margin-top: 0;
-}
+    .restaurant-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+    }
 
-.restaurant-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
-    padding: 2.2rem 2.5rem;
-    min-width: 320px;
-    max-width: 420px;
-    flex: 1 1 320px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.2s;
-    border: 1px solid #e0e0e0;
-    color: #222 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+    .restaurant-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        text-decoration: none !important;
+        color: #222 !important;
+        display: flex;
+        flex-direction: column;
+    }
 
-.restaurant-card:hover,
-.restaurant-card.active {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    transform: translateY(-4px) scale(1.03);
-    border-color: #7cdb6b;
-}
+    .restaurant-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-6px);
+        border-color: #7cdb6b;
+    }
 
-.restaurant-card h2 {
-    margin: 0 0 0.7rem 0;
-    font-size: 1.4rem;
-    color: #222;
-    font-weight: 600;
-}
+    .restaurant-image {
+        width: 100%;
+        height: 220px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
-.restaurant-card .restaurant-info {
-    font-size: 1.08rem;
-    color: #444;
-    margin-bottom: 0.5rem;
-}
+    .restaurant-content {
+        padding: 1.5rem 1.8rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
 
-.restaurant-card .restaurant-email {
-    color: #7cdb6b;
-    font-size: 0.98rem;
-    margin-top: 0.5rem;
-}
+    .restaurant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+    }
 
-.restaurant-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: flex-start;
-    margin-top: 2rem;
-}
+    .restaurant-card h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #222;
+        font-weight: 600;
+    }
 
-NavLink {
-    text-decoration: none !important;
-}
+    .status {
+        font-size: 0.95rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
 
-.restaurant-card {
-    display: block;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-    padding: 1.5rem 2rem;
-    min-width: 260px;
-    max-width: 320px;
-    flex: 1 1 260px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.2s;
-    border: 1px solid #e0e0e0;
-    text-decoration: none !important;
-    color: #222 !important;
-}
+    .status.open {
+        color: #7cdb6b;
+    }
 
-.restaurant-card:visited,
-.restaurant-card:active,
-.restaurant-card:focus {
-    color: #222 !important;
-    text-decoration: none !important;
-    outline: none;
+    .status.closed {
+        color: #e94a5a;
+    }
+
+    .restaurant-info {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0.4rem;
+    }
+
+    .restaurant-email {
+        color: #7cdb6b;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+    }
 }
 
 .restaurant-card:hover,
