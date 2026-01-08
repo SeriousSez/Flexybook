@@ -23,11 +23,10 @@ else
         @foreach (var restaurant in restaurants)
         {
             var isOpen = IsRestaurantOpen(restaurant);
-            var firstImage = restaurant.Images?.FirstOrDefault()?.Url ?? "/images/restaurant-interior.jpg";
             
             <NavLink href="@($"/restaurant/{restaurant.Id}")" style="text-decoration: none;">
                 <div class="restaurant-card">
-                    <div class="restaurant-image" style="background-image: url('@firstImage');"></div>
+                    <div class="restaurant-image" style="background-image: url('@restaurant.Images?.FirstOrDefault()?.Base64Data');"></div>
                     <div class="restaurant-content">
                         <div class="restaurant-header">
                             <h2>@restaurant.Name</h2>

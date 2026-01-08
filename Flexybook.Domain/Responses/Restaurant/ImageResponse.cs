@@ -5,7 +5,7 @@ namespace Flexybook.Domain.Responses.Restaurant
 {
     public class ImageResponse : BaseResponse
     {
-        public required string Url { get; set; }
+        public string? Base64Data { get; set; }
         public Guid RestaurantId { get; set; }
 
         public ImageEntity ToEntity(RestaurantEntity restaurant)
@@ -14,7 +14,7 @@ namespace Flexybook.Domain.Responses.Restaurant
             {
                 Id = this.Id,
                 Created = this.Created,
-                Url = this.Url,
+                Base64Image = this.Base64Data,
                 RestaurantId = this.RestaurantId,
                 Restaurant = restaurant
             };

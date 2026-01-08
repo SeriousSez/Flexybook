@@ -4,7 +4,7 @@ namespace Flexybook.Domain.Entities.Restaurant
 {
     public class Image : BaseEntity
     {
-        public required string Url { get; set; }
+        public string? Base64Image { get; set; }
         public Guid RestaurantId { get; set; }
         public required Restaurant Restaurant { get; set; }
 
@@ -14,7 +14,7 @@ namespace Flexybook.Domain.Entities.Restaurant
             {
                 Id = this.Id,
                 Created = this.Created,
-                Url = this.Url,
+                Base64Data = this.Base64Image,
                 RestaurantId = this.RestaurantId,
             };
         }

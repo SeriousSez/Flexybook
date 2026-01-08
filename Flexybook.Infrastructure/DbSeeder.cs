@@ -13,7 +13,7 @@ namespace Flexybook.Infrastructure
             {
                 Id = restaurantAalborgId,
                 Name = "Aalborg",
-                Address = "Østergade 27, 9000",
+                Address = "Ã˜sterÃ¥gade 27, 9000",
                 City = "Aalborg",
                 Telephone = "+45 11 22 33 44",
                 Email = "aalborg@flexybox.com",
@@ -21,8 +21,8 @@ namespace Flexybook.Infrastructure
             };
             var imagesAalborg = new List<Image>
             {
-                new Image { Id = Guid.NewGuid(), Url = "/images/restaurant-interior.jpg", RestaurantId = restaurantAalborgId, Restaurant = restaurantAalborg },
-                new Image { Id = Guid.NewGuid(), Url = "/images/lee-campbell.jpg", RestaurantId = restaurantAalborgId, Restaurant = restaurantAalborg }
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/restaurant-interior.jpg"), RestaurantId = restaurantAalborgId, Restaurant = restaurantAalborg },
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/lee-campbell.jpg"), RestaurantId = restaurantAalborgId, Restaurant = restaurantAalborg }
             };
             var openingHoursAalborg = new List<OpeningHour>
             {
@@ -71,7 +71,7 @@ namespace Flexybook.Infrastructure
             {
                 Id = restaurantOdenseId,
                 Name = "Odense",
-                Address = "Nøglens Kvarter 181, 5220",
+                Address = "NÃ¸glens Kvarter 181, 5220",
                 City = "Odense",
                 Telephone = "+45 52 82 82 21",
                 Email = "odense@flexybox.com",
@@ -79,10 +79,10 @@ namespace Flexybook.Infrastructure
             };
             var imagesOdense = new List<Image>
             {
-                new Image { Id = Guid.NewGuid(), Url = "/images/food.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new Image { Id = Guid.NewGuid(), Url = "/images/food2.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new Image { Id = Guid.NewGuid(), Url = "/images/food3.jpeg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
-                new Image { Id = Guid.NewGuid(), Url = "/images/fancy-interior.jpg", RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense }
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/food.jpeg"), RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/food2.jpeg"), RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/food3.jpeg"), RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense },
+                new Image { Id = Guid.NewGuid(), Base64Image = ConvertImageToBase64("/images/fancy-interior.jpg"), RestaurantId = restaurantOdenseId, Restaurant = restaurantOdense }
             };
             var openingHoursOdense = new List<OpeningHour>
             {
@@ -119,6 +119,35 @@ namespace Flexybook.Infrastructure
             db.Restaurants.Add(restaurantAalborg);
             db.Restaurants.Add(restaurantOdense);
             db.SaveChanges();
+        }
+
+        private static string ConvertImageToBase64(string imagePath)
+        {
+            try
+            {
+                var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath.TrimStart('/'));
+                if (!File.Exists(fullPath))
+                {
+                    return string.Empty;
+                }
+
+                var imageBytes = File.ReadAllBytes(fullPath);
+                var extension = Path.GetExtension(fullPath).ToLower();
+                var mimeType = extension switch
+                {
+                    ".jpg" or ".jpeg" => "image/jpeg",
+                    ".png" => "image/png",
+                    ".gif" => "image/gif",
+                    ".webp" => "image/webp",
+                    _ => "image/jpeg"
+                };
+
+                return $"data:{mimeType};base64,{Convert.ToBase64String(imageBytes)}";
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

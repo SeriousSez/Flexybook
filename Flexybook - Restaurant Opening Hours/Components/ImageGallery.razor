@@ -4,7 +4,7 @@
     <div class="image-gallery-inner">
         @foreach (var image in Images)
         {
-            <img src="@image.Url" alt="Restaurant image" class="image" />
+            <img src="@image.Base64Data" alt="Restaurant image" class="image" />
         }
     </div>
 }
