@@ -21,5 +21,19 @@ namespace Flexybook.Infrastructure.Repositories
                 .AsNoTracking()
                 .SingleOrDefaultAsync(u => u.Id == id.ToString());
         }
+
+        public virtual async Task<bool> UpdateAsync(UserEntity user)
+        {
+            try
+            {
+                _dbSet.Update(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

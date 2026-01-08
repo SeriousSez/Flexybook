@@ -9,26 +9,6 @@ namespace Flexybook.Infrastructure
     {
         public static async Task SeedAsync(RestaurantContext db, UserManager<UserEntity> userManager)
         {
-            // Seed User
-            var existingUser = await userManager.FindByNameAsync("Flexybook");
-            if (existingUser == null)
-            {
-                var user = new UserEntity
-                {
-                    UserName = "Flexybook",
-                    Email = "flexybook@example.com",
-                    FirstName = "Flexy",
-                    LastName = "Book",
-                    Created = DateTime.Now,
-                    EmailConfirmed = true
-                };
-
-                var result = await userManager.CreateAsync(user, "Flexybook1234");
-                if (!result.Succeeded)
-                {
-                    throw new Exception($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            }
             // Aalborg
             var restaurantAalborgId = Guid.NewGuid();
             var restaurantAalborg = new Restaurant
@@ -135,6 +115,28 @@ namespace Flexybook.Infrastructure
             };
             restaurantOdense.Images = imagesOdense;
             restaurantOdense.OpeningHours = openingHoursOdense;
+            // Seed User
+
+            var existingUser = await userManager.FindByNameAsync("Flexybook");
+            if (existingUser == null)
+            {
+                var user = new UserEntity
+                {
+                    UserName = "Flexybook",
+                    Email = "flexybook@example.com",
+                    FirstName = "Flexy",
+                    LastName = "Book",
+                    Created = DateTime.Now,
+                    EmailConfirmed = true,
+                    FavouredRestaurants = new List<Guid>() { restaurantOdenseId }
+                };
+
+                var result = await userManager.CreateAsync(user, "Flexybook1234");
+                if (!result.Succeeded)
+                {
+                    throw new Exception($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+            }
 
             db.Restaurants.Add(restaurantAalborg);
             db.Restaurants.Add(restaurantOdense);

@@ -1,9 +1,15 @@
 @page "/restaurant/{Id:guid}"
 @using Flexybook.ApplicationService.Services
 @using Flexybook.Domain.Responses.Restaurant
+@using Flexybook___Restaurant_Opening_Hours.Authentication
+@using Microsoft.AspNetCore.Components.Authorization
 @inject IRestaurantService RestaurantService
+@inject IUserService UserService
 @inject NavigationManager NavigationManager
+@inject CustomAuthenticationStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
+@implements IDisposable
 
 @if (!string.IsNullOrEmpty(ToastMessage))
 {
@@ -20,7 +26,10 @@ else
         <div class="header">
             <div class="title-row">
                 <h1 class="restaurant-title">@restaurant.Name</h1>
-                <span class="favourite-icon @(restaurant.IsFavourite ? "active" : "")" @onclick="ToggleFavouriteAsync" style="cursor:pointer;">&#9825;</span>
+                @if (isAuthenticated)
+                {
+                    <span class="favourite-icon @(isFavourite ? "active" : "")" @onclick="ToggleFavouriteAsync" style="cursor:pointer;">&#9825;</span>
+                }
             </div>
             <div class="information-row">
                 <span class="status @(IsOpen ? "open" : "closed")">• @(IsOpen ? "Open" : "Closed")</span>
@@ -43,6 +52,8 @@ else
     private string ToastMessage { get; set; } = "";
     private bool ToastSuccess { get; set; }
     private bool IsOpen { get; set; }
+    private bool isFavourite = false;
+    private bool isAuthenticated = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -51,6 +62,49 @@ else
             return;
 
         IsRestaurantOpen(restaurant.OpeningHours);
+        await CheckAuthenticationAndFavourites();
+        
+        // Subscribe to authentication state changes
+        AuthenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+    }
+
+    private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    {
+        await CheckAuthenticationAndFavourites();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task CheckAuthenticationAndFavourites()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        isAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
+        
+        if (isAuthenticated)
+        {
+            await CheckIfFavourite();
+        }
+        else
+        {
+            isFavourite = false;
+        }
+    }
+
+    private async Task CheckIfFavourite()
+    {
+        var userId = AuthStateProvider.GetUserId();
+        if (!string.IsNullOrEmpty(userId))
+        {
+            var user = await UserService.GetUserAsync(userId);
+            if (user?.FavouredRestaurants != null)
+            {
+                isFavourite = user.FavouredRestaurants.Contains(Id);
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        AuthenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
     }
 
     private async Task ToggleFavouriteAsync()
@@ -58,17 +112,30 @@ else
         if (restaurant is null)
             return;
 
-        restaurant.IsFavourite = !restaurant.IsFavourite;
-        var success = await RestaurantService.UpdateAsync(restaurant);
+        var userId = AuthStateProvider.GetUserId();
+        if (string.IsNullOrEmpty(userId))
+        {
+            ToastSuccess = false;
+            ToastMessage = "Please log in to add favorites";
+            await Task.Delay(3000);
+            ToastMessage = string.Empty;
+            StateHasChanged();
+            return;
+        }
+
+        isFavourite = !isFavourite;
+        var success = await UserService.UpdateUserFavouritesAsync(userId, restaurant.Id, isFavourite);
+        
         if (success)
         {
             ToastSuccess = true;
-            ToastMessage = restaurant.IsFavourite ? "Department has been added as a favorite" : "Department has been removed as a favorite";
+            ToastMessage = isFavourite ? "Restaurant has been added as a favorite" : "Restaurant has been removed as a favorite";
         }
         else
         {
+            isFavourite = !isFavourite; // Revert on failure
             ToastSuccess = false;
-            ToastMessage = "Department could not be added as a favourite";
+            ToastMessage = "Restaurant could not be updated as a favourite";
         }
         await Task.Delay(3000);
         ToastMessage = string.Empty;

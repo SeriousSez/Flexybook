@@ -1,10 +1,67 @@
-﻿<nav class="flexy-navbar">
+﻿@using Flexybook.ApplicationService.Services
+@using Flexybook___Restaurant_Opening_Hours.Authentication
+@using Microsoft.AspNetCore.Components.Authorization
+@inject IProfileService ProfileService
+@inject CustomAuthenticationStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
+
+@if (!string.IsNullOrEmpty(ToastMessage))
+{
+    <div class="toast @(ToastSuccess ? "success" : "failure")">@ToastMessage</div>
+}
+
+<nav class="flexy-navbar">
     <div class="navbar-container">
         <a class="navbar-brand" href="">Flexybook</a>
         <div class="navbar-menu">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 Restaurants
             </NavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <button class="nav-link auth-link" @onclick="HandleLogout">Logout</button>
+                </Authorized>
+                <NotAuthorized>
+                    <button class="nav-link auth-link" @onclick="HandleLogin">Login</button>
+                </NotAuthorized>
+            </AuthorizeView>
         </div>
     </div>
 </nav>
+
+@code {
+    private string ToastMessage { get; set; } = "";
+    private bool ToastSuccess { get; set; }
+
+    private async Task HandleLogin()
+    {
+        var token = await ProfileService.LoginAsync();
+
+        if (token != null)
+        {
+            AuthStateProvider.MarkUserAsAuthenticated(token);
+            await ShowToast("Successfully logged in", true);
+        }
+        else
+        {
+            await ShowToast("Login failed", false);
+        }
+    }
+
+    private async Task HandleLogout()
+    {
+        AuthStateProvider.MarkUserAsLoggedOut();
+        await ShowToast("Successfully logged out", true);
+    }
+
+    private async Task ShowToast(string message, bool success)
+    {
+        ToastSuccess = success;
+        ToastMessage = message;
+        StateHasChanged();
+        await Task.Delay(3000);
+        ToastMessage = string.Empty;
+        StateHasChanged();
+    }
+}

@@ -17,7 +17,9 @@ namespace Flexybook.Domain.Entities
                 UserName = this.UserName,
                 FirstName = this.FirstName,
                 LastName = this.LastName,
-                Email = this.Email
+                Email = this.Email,
+                Created = this.Created,
+                FavouredRestaurants = this.FavouredRestaurants
             };
         }
     }

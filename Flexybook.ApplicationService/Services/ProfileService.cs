@@ -10,9 +10,9 @@ namespace Flexybook.ApplicationService.Services
         private readonly UserManager<UserEntity> _userManager;
         private readonly JwtHandler _jwtHandler;
 
-        private static readonly string Password = "Flexybook1234";
-
-        public ProfileService(UserManager<UserEntity> userManager, JwtHandler jwtHandler)
+        public ProfileService(
+            UserManager<UserEntity> userManager,
+            JwtHandler jwtHandler)
         {
             _userManager = userManager;
             _jwtHandler = jwtHandler;
@@ -20,18 +20,11 @@ namespace Flexybook.ApplicationService.Services
 
         public async Task<string?> LoginAsync()
         {
-
-            var user = await _userManager.FindByNameAsync("");
-            if (user == null)
-                user = await _userManager.FindByEmailAsync("");
-
+            var user = await _userManager.FindByNameAsync("Flexybook");
             if (user == null)
                 return null;
 
             if (!await _userManager.IsEmailConfirmedAsync(user))
-                return null;
-
-            if (!await _userManager.CheckPasswordAsync(user, Password))
                 return null;
 
             var signingCredentials = _jwtHandler.GetSigningCredentials();

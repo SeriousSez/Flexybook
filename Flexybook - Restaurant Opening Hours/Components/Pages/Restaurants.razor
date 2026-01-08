@@ -2,8 +2,12 @@
 @using Flexybook.ApplicationService.Services
 @using Flexybook.Domain.Responses.Restaurant
 @using Flexybook.Domain
+@using Flexybook___Restaurant_Opening_Hours.Authentication
+@using Microsoft.AspNetCore.Components.Authorization
 @inject IRestaurantService RestaurantService
 @inject NavigationManager NavigationManager
+@inject CustomAuthenticationStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Restaurants</PageTitle>
 
@@ -23,10 +27,12 @@ else
         @foreach (var restaurant in restaurants)
         {
             var isOpen = IsRestaurantOpen(restaurant);
+            var firstImage = restaurant.Images?.FirstOrDefault();
+            var imageUrl = firstImage?.Base64Data ?? "/images/restaurant-interior.jpg";
             
             <NavLink href="@($"/restaurant/{restaurant.Id}")" style="text-decoration: none;">
                 <div class="restaurant-card">
-                    <div class="restaurant-image" style="background-image: url('@restaurant.Images?.FirstOrDefault()?.Base64Data');"></div>
+                    <div class="restaurant-image" style="background-image: url('@imageUrl');"></div>
                     <div class="restaurant-content">
                         <div class="restaurant-header">
                             <h2>@restaurant.Name</h2>

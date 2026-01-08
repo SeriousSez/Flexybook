@@ -3,21 +3,24 @@ using Flexybook.Infrastructure.Repositories;
 
 namespace Flexybook.ApplicationService.Services
 {
-    public class RestaurantService(IRestaurantRepository restaurantRepository) : IRestaurantService
+    public class RestaurantService : IRestaurantService
     {
-        private readonly IRestaurantRepository _restaurantRepository = restaurantRepository;
+        private readonly IRestaurantRepository _restaurantRepository;
+
+        public RestaurantService(IRestaurantRepository restaurantRepository)
+        {
+            _restaurantRepository = restaurantRepository;
+        }
 
         public async Task<RestaurantResponse?> GetAsync(Guid id)
         {
             var restaurant = await _restaurantRepository.GetFullAsync(id);
-
             return restaurant?.ToResponse();
         }
 
         public async Task<IEnumerable<RestaurantResponse>> GetAllAsync()
         {
             var restaurants = await _restaurantRepository.GetAllFullAsync();
-
             return restaurants.Select(r => r.ToResponse());
         }
 

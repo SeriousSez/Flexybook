@@ -4,5 +4,6 @@ namespace Flexybook.Infrastructure.Repositories
     public interface IUserRepository
     {
         Task<UserEntity?> GetAsync(Guid id);
+        Task<bool> UpdateAsync(UserEntity user);
     }
 }

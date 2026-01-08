@@ -2,9 +2,11 @@ using Flexybook.ApplicationService.Extensions;
 using Flexybook.Domain.Entities;
 using Flexybook.Infrastructure;
 using Flexybook.Infrastructure.Extensions;
+using Flexybook___Restaurant_Opening_Hours.Authentication;
 using Flexybook___Restaurant_Opening_Hours.Components;
 using Flexybook___Restaurant_Opening_Hours.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddScoped<CustomAuthenticationStateProvider>(provider => 
+    (CustomAuthenticationStateProvider)provider.GetRequiredService<AuthenticationStateProvider>());
+builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<RestaurantContext>(options =>
     options.UseInMemoryDatabase("FlexybookDb"));
