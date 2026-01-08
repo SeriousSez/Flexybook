@@ -227,6 +227,41 @@ The application will:
 - **Email**: flexybook@example.com
 - **Password**: Flexybook1234 (only needed if you disable auto-login)
 
+## 🧪 Testing
+
+Automated tests are included to ensure code quality and reliability.
+
+### Test Projects
+
+- **Flexybook.AplicationService.Tests**: Contains unit tests for business logic and helper classes in the ApplicationService layer.
+- **Flexybook.Infrastructure.Tests**: Contains tests for the data access layer and infrastructure services.
+
+### Running Tests
+
+You can run all tests using the .NET CLI:
+
+```sh
+dotnet test
+```
+
+Or run tests for a specific project:
+
+```sh
+dotnet test Flexybook.AplicationService.Tests/Flexybook.AplicationService.Tests.csproj
+dotnet test Flexybook.Infrastructure.Tests/Flexybook.Infrastructure.Tests.csproj
+```
+
+Test results will be displayed in the terminal. You can also run and debug tests from within Visual Studio or VS Code using the Test Explorer.
+
+### Test Structure
+
+- **Helpers/**: Tests for utility and helper classes
+- **Services/**: Tests for business and data services
+
+Tests follow the Arrange-Act-Assert pattern and cover key business logic, data access, and helper utilities.
+
+---
+
 ## 📝 Code Quality
 
 ### Recent Refactoring
