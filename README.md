@@ -10,22 +10,20 @@ This project was developed as part of a .NET Developer job application assignmen
 - **Responsive design**: Fully responsive layout for both desktop and mobile, closely following the Figma mobile and desktop views.
 - **Tab navigation**: Switch between different opening hour types (Restaurant, Takeaway, Buffet, Special Events) with swipeable tabs.
 - **Image gallery**: Horizontal scrollable image gallery with mouse wheel and touch support.
-- **Authentication**: Login/logout flow with seeded user, using ASP.NET Core Identity (no credentials required for demo login).
-- **Skeleton loaders**: Smooth loading states for data fetches, matching the Figma design.
-- **Error handling**: Custom 404 page for invalid routes.
-- **In-memory database**: Entity Framework Core with demo data seeding for rapid prototyping.
-- **Clean architecture**: Domain, Infrastructure, ApplicationService, and UI layers for maintainability and testability.
 
 ### Enhancements Beyond Requirements
 
+- **Clean architecture**: Domain, Infrastructure, ApplicationService, and UI layers for maintainability and testability.
 - **Automated tests**: Added unit tests for helpers and services to ensure code quality and reliability.
 - **JWT authentication**: Implemented JWT token handling to demonstrate secure authentication patterns.
 - **Smart hour grouping**: Automatically groups days with identical opening hours for a cleaner UI.
 - **Custom authentication state provider**: Fine-tuned authentication state handling for better UX.
 - **Accessibility improvements**: Used semantic HTML and ARIA attributes where possible.
-- **Image compression**: Optimized images for faster loading.
+- **Authentication**: Login/logout flow with seeded user, using ASP.NET Core Identity (no credentials required for demo login).
+- **Skeleton loaders**: Smooth loading states for data fetches, matching the Figma design.
+- **Error handling**: Custom 404 page for invalid routes.
+- **In-memory database**: Entity Framework Core with demo data seeding for rapid prototyping.
 - **Comprehensive documentation**: Detailed README with setup instructions, time tracking, and architectural rationale.
-- **No external UI/CSS frameworks**: All styling and components are hand-crafted, as required.
 
 ---
 
