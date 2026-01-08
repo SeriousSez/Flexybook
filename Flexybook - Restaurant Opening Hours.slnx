@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="Flexybook - Restaurant Opening Hours/Flexybook - Restaurant Opening Hours.csproj" />
+  <Project Path="Flexybook/Flexybook.csproj" />
   <Project Path="Flexybook.AplicationService.Tests/Flexybook.AplicationService.Tests.csproj" Id="c81168e6-7371-4430-a8f8-1aedfb15abfe" />
   <Project Path="Flexybook.ApplicationService/Flexybook.ApplicationService.csproj" Id="824bc1a5-02fc-418a-b0e5-9dd658b20df5" />
   <Project Path="Flexybook.Domain/Flexybook.Domain.csproj" Id="5e1c9f96-efda-4a0c-b4bc-85e1bf8aab39" />

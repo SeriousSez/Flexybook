@@ -3,7 +3,7 @@ using Flexybook.Infrastructure;
 using Flexybook.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
 
-namespace Flexybook___Restaurant_Opening_Hours.Extensions
+namespace Flexybook.Extensions
 {
     /// <summary>
     /// Extension methods for IApplicationBuilder to configure application startup.

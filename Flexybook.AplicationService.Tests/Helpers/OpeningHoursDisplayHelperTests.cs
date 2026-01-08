@@ -1,5 +1,5 @@
 using Flexybook.Domain.Responses.Restaurant;
-using Flexybook___Restaurant_Opening_Hours.Helpers;
+using Flexybook.Helpers;
 using FluentAssertions;
 using Xunit;
 

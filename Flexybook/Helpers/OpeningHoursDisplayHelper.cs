@@ -1,6 +1,6 @@
 using Flexybook.Domain.Responses.Restaurant;
 
-namespace Flexybook___Restaurant_Opening_Hours.Helpers
+namespace Flexybook.Helpers
 {
     /// <summary>
     /// Helper class for formatting and grouping opening hours for display.

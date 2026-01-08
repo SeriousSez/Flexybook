@@ -27,7 +27,7 @@
     <ProjectReference Include="..\Flexybook.ApplicationService\Flexybook.ApplicationService.csproj" />
     <ProjectReference Include="..\Flexybook.Domain\Flexybook.Domain.csproj" />
     <ProjectReference Include="..\Flexybook.Infrastructure\Flexybook.Infrastructure.csproj" />
-    <ProjectReference Include="..\Flexybook - Restaurant Opening Hours\Flexybook - Restaurant Opening Hours.csproj" />
+    <ProjectReference Include="..\Flexybook\Flexybook.csproj" />
   </ItemGroup>
 
 </Project>

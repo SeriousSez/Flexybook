@@ -1,4 +1,4 @@
-# Flexybook - Restaurant Opening Hours
+# Flexybook
 
 A modern web application for displaying restaurant information, opening hours, contact details, and image galleries. Built with Blazor Server and ASP.NET Core Identity.
 
@@ -13,7 +13,7 @@ Flexybook is a restaurant management application that allows users to browse mul
 - **Flexybook.Domain**: Contains entities, responses, and business models
 - **Flexybook.Infrastructure**: Handles data access with Entity Framework Core and repositories
 - **Flexybook.ApplicationService**: Contains business logic and service layer
-- **Flexybook - Restaurant Opening Hours**: Presentation layer with Blazor components
+- **Flexybook**: Presentation layer with Blazor components
 
 This separation ensures maintainability, testability, and follows Single Responsibility Principle throughout the codebase.
 
@@ -191,7 +191,7 @@ Flexybook-Restaurant-Opening-Hours/
 │   │   └── ProfileService.cs
 │   ├── JwtFeatures/                 # JWT handling
 │   └── Extensions/                  # Service registration
-└── Flexybook - Restaurant Opening Hours/
+└── Flexybook/
     ├── Components/
     │   ├── Pages/                   # Routable pages
     │   ├── Shared/                  # Reusable components
@@ -212,7 +212,7 @@ Flexybook-Restaurant-Opening-Hours/
 
 1. Clone the repository
 2. Open the solution in Visual Studio
-3. Set `Flexybook - Restaurant Opening Hours` as startup project
+3. Set `Flexybook` as startup project
 4. Press F5 to run
 
 The application will:
