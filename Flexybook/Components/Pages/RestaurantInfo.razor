@@ -25,8 +25,8 @@
                 <div class="skeleton skeleton-title"></div>
             </div>
             <div class="information-row">
-                <div class="skeleton skeleton-text" style="width: 70px; height: 1.1rem;"></div>
-                <div class="skeleton skeleton-text" style="width: 280px; height: 1.08rem;"></div>
+                <div class="skeleton skeleton-text skeleton-width-70 skeleton-height-1-1"></div>
+                <div class="skeleton skeleton-text skeleton-width-280 skeleton-height-1-08"></div>
             </div>
             <div class="skeleton-contact-row">
                 <div class="skeleton skeleton-contact"></div>
@@ -37,17 +37,17 @@
         <div class="skeleton skeleton-gallery"></div>
         <div class="mobile-divider"></div>
         <div class="skeleton-opening-hours">
-            <div class="skeleton skeleton-text" style="width: 140px; height: 1rem; margin-bottom: 2rem;"></div>
-            <div style="margin-bottom: 1.2rem; display: flex; gap: .5rem;">
-                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
-                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
-                <div class="skeleton skeleton-text" style="width: 110px; height: 2.2rem; border-radius: 20px; display: inline-block;"></div>
+            <div class="skeleton skeleton-text skeleton-width-140 skeleton-height-1 skeleton-mb-2"></div>
+            <div class="skeleton-tab-row">
+                <div class="skeleton skeleton-text skeleton-width-110 skeleton-height-2-2 skeleton-radius-20 skeleton-inline-block"></div>
+                <div class="skeleton skeleton-text skeleton-width-110 skeleton-height-2-2 skeleton-radius-20 skeleton-inline-block"></div>
+                <div class="skeleton skeleton-text skeleton-width-110 skeleton-height-2-2 skeleton-radius-20 skeleton-inline-block"></div>
             </div>
             @for (int i = 0; i < 5; i++)
             {
                 <div class="skeleton-day-time">
-                    <div class="skeleton skeleton-text skeleton-day" style="width: 140px; height: 1.08rem;"></div>
-                    <div class="skeleton skeleton-text skeleton-time" style="width: 110px; height: 1.08rem;"></div>
+                    <div class="skeleton skeleton-text skeleton-day skeleton-width-140 skeleton-height-1-08"></div>
+                    <div class="skeleton skeleton-text skeleton-time skeleton-width-110 skeleton-height-1-08"></div>
                 </div>
             }
         </div>
@@ -62,7 +62,7 @@ else
                 <h1 class="restaurant-title">@restaurant.Name</h1>
                 @if (isAuthenticated)
                 {
-                    <span class="favourite-icon @(isFavourite ? "active" : "")" @onclick="ToggleFavouriteAsync" style="cursor:pointer;">&#9825;</span>
+                    <span class="favourite-icon @(isFavourite ? "active" : "")" @onclick="ToggleFavouriteAsync">&#9825;</span>
                 }
             </div>
             <div class="information-row">

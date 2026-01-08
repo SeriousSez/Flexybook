@@ -45,6 +45,19 @@ body {
 }
 
 /* Skeleton Loader Styles */
+.skeleton-width-70 { width: 70px; }
+.skeleton-width-110 { width: 110px; }
+.skeleton-width-140 { width: 140px; }
+.skeleton-width-280 { width: 280px; }
+.skeleton-height-1 { height: 1rem; }
+.skeleton-height-1-08 { height: 1.08rem; }
+.skeleton-height-1-1 { height: 1.1rem; }
+.skeleton-height-2-2 { height: 2.2rem; }
+.skeleton-mb-2 { margin-bottom: 2rem; }
+.skeleton-radius-20 { border-radius: 20px; }
+.skeleton-inline-block { display: inline-block; }
+.skeleton-tab-row { margin-bottom: 1.2rem; display: flex; gap: .5rem; }
+
 .skeleton-container {
     pointer-events: none;
 }

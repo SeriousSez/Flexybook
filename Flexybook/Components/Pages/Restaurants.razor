@@ -22,9 +22,9 @@
                 <div class="skeleton skeleton-image"></div>
                 <div class="restaurant-content">
                     <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-text" style="width: 70%; margin-top: 0.5rem;"></div>
-                    <div class="skeleton skeleton-text" style="width: 60%; margin-top: 0.5rem;"></div>
-                    <div class="skeleton skeleton-text" style="width: 50%; margin-top: 0.5rem;"></div>
+                    <div class="skeleton skeleton-text skeleton-width-70 skeleton-mt-0-5"></div>
+                    <div class="skeleton skeleton-text skeleton-width-60 skeleton-mt-0-5"></div>
+                    <div class="skeleton skeleton-text skeleton-width-50 skeleton-mt-0-5"></div>
                 </div>
             </div>
         }
@@ -43,9 +43,9 @@ else
             var firstImage = restaurant.Images?.FirstOrDefault();
             var imageUrl = firstImage?.Base64Data ?? "/images/restaurant-interior.jpg";
             
-            <NavLink href="@($"/restaurant/{restaurant.Id}")" style="text-decoration: none;">
+            <NavLink href="@($"/restaurant/{restaurant.Id}")" class="no-underline">
                 <div class="restaurant-card">
-                    <div class="restaurant-image" style="background-image: url('@imageUrl');"></div>
+                    <div class="restaurant-image" style="background-image: url('@imageUrl')"></div>
                     <div class="restaurant-content">
                         <div class="restaurant-header">
                             <h2>@restaurant.Name</h2>

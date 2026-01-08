@@ -1,4 +1,29 @@
+::deep .no-underline,
+::deep .no-underline:visited,
+::deep .no-underline:hover,
+::deep .no-underline:active,
+::deep .no-underline:focus {
+    text-decoration: none !important;
+    color: inherit;
+}
+
 /* Skeleton Loader Styles */
+.skeleton-width-70 {
+    width: 70%;
+}
+
+.skeleton-width-60 {
+    width: 60%;
+}
+
+.skeleton-width-50 {
+    width: 50%;
+}
+
+.skeleton-mt-0-5 {
+    margin-top: 0.5rem;
+}
+
 .skeleton-container {
     pointer-events: none;
 }
