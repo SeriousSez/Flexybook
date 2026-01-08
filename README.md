@@ -21,7 +21,6 @@ This project was developed as part of a .NET Developer job application assignmen
 - **Accessibility improvements**: Used semantic HTML and ARIA attributes where possible.
 - **Authentication**: Login/logout flow with seeded user, using ASP.NET Core Identity (no credentials required for demo login).
 - **Skeleton loaders**: Smooth loading states for data fetches, matching the Figma design.
-- **Error handling**: Custom 404 page for invalid routes.
 - **In-memory database**: Entity Framework Core with demo data seeding for rapid prototyping.
 - **Comprehensive documentation**: Detailed README with setup instructions, time tracking, and architectural rationale.
 
