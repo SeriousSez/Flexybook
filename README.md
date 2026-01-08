@@ -1,3 +1,9 @@
+> **Tip:** To view the mobile layout, open your browser's developer tools (usually F12 or right-click → Inspect), then toggle the device toolbar (often the phone/tablet icon) and select a mobile device.
+
+> **Note:** I attempted to implement a feature that would allow users to preview the mobile layout directly in the browser (e.g., via a toggle or button), but this is not reliably possible. Browsers do not allow you to programmatically change the viewport or user agent in a way that fully simulates a mobile device. The only accurate way to view the mobile layout is by using the device emulation tools built into browser developer tools.
+
+</div>
+
 # Flexybook
 
 > **Note:** This project was created for evaluation and testing purposes by the company **FlexyBox ApS**.
@@ -299,7 +305,37 @@ The codebase underwent comprehensive cleanup following best practices:
 - Separation of concerns
 - Clean architecture principles
 
-## 🔮 Future Enhancements
+## 🧩 Service Usage Pattern in Blazor Server
+
+In this project, Razor components (pages) call application and domain services directly via dependency injection. This is considered best practice for Blazor Server applications because:
+
+- The code runs on the server, so components have direct access to backend services and data.
+- It simplifies the architecture and avoids unnecessary HTTP calls or API layers.
+- Dependency injection ensures services are testable and maintainable.
+
+**When should you use API endpoints instead?**
+
+- If you plan to support other clients (e.g., mobile apps, external web apps) that need to access your backend.
+- If you want to decouple the UI from the backend for future flexibility or scalability.
+- In Blazor WebAssembly (client-side), where the client cannot access server-side services directly and must use HTTP APIs.
+
+For this Blazor Server project, direct service injection is efficient and idiomatic. If the application evolves to support multiple frontends, introducing API endpoints would be recommended.
+
+## 💡 Additional Improvements & Ideas
+
+Here are some further suggestions for what could be added or improved in the project:
+
+- [ ] **Accessibility improvements**: Ensure all interactive elements are accessible via keyboard and screen readers, add ARIA labels, and improve color contrast.
+- [ ] **Automated UI testing**: Add end-to-end tests using Playwright or Selenium to verify user flows and UI behavior.
+- [ ] **Performance optimization**: Profile and optimize component rendering, image loading, and data fetching for large datasets.
+- [ ] **Progressive Web App (PWA) support**: Enable offline access, installability, and push notifications.
+- [ ] **Role-based authorization**: Implement different user roles (admin, staff, guest) with varying permissions.
+- [ ] **API documentation**: Add Swagger/OpenAPI documentation for backend APIs.
+- [ ] **Continuous Integration/Deployment (CI/CD)**: Set up automated build, test, and deployment pipelines (e.g., GitHub Actions, Azure DevOps).
+- [ ] **Custom error pages**: Improve user experience for 404 and 500 errors with branded error pages.
+- [ ] **User activity logging and analytics**: Track user actions for insights and debugging.
+- [ ] **Refined mobile gestures**: Add swipe gestures and touch optimizations for mobile users.
+- [ ] **Unit test coverage reports**: Integrate tools to visualize and improve code coverage.
 
 - [ ] Real database with migrations (SQL Server or PostgreSQL)
 - [ ] Proper image storage (file system or blob storage)
