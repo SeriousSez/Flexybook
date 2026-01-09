@@ -104,6 +104,7 @@ This separation ensures maintainability, testability, and follows Single Respons
 - **Horizontal Wheel Scroll**: Mouse wheel scrolls horizontally in galleries and tabs
 - **Authentication State**: Proper handling of authentication timing with loading indicators
 - **Error Handling**: The default 404 page for invalid routes
+- **Mobile Navigation Positioning**: Navigation is placed at the bottom of the screen on mobile devices for better ergonomics, as it is naturally closer to the thumb on larger modern mobile devices
 
 ### Technical Features
 
